@@ -32,9 +32,9 @@ function main () {
       db,
       { useNewUrlParser: true }
     )
-    .then(() => console.log("MongoDB successfully connected"))
+    .then(() => console.log("MongoDB successfully connected for MANAGEMENT SERVICE"))
     .catch(err => console.log(err));
-  console.log(db);
+  
 //   app.get('/api/management/courses', middleware.checkToken, handlers.index);
   app.listen(port, () => console.log(`Server is listening on port: ${port}`));
 }
