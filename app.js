@@ -23,10 +23,7 @@ function main () {
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
   });
-  app.use(bodyParser.json());
-  app.use("/api/users", users);
-  app.use("/api/backend", backend);
-  app.use("/api/management", management);
+  
   app.use("/api/management", courses);
 
   const db = require("./config/keys").mongoURI;
