@@ -10,19 +10,23 @@ function main () {
   let app = express(); // Export app for other routes to use
 //   let handlers = new HandlerGenerator();
   const port = process.env.PORT || 3000;
+ 
+  var cors=require('cors');
+
+  app.options('*', cors());
   app.use(bodyParser.urlencoded({ // Middleware
     extended: true
   }));
-  app.use(function(req,res,next){
+
+  app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
-    // res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-    res.header("Access-Control-Allow-Credentials", true);
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
-});
+  });
   app.use(bodyParser.json());
-  // Routes & Handlers
-//   app.post('/login', handlers.login);
+  app.use("/api/users", users);
+  app.use("/api/backend", backend);
+  app.use("/api/management", management);
   app.use("/api/management", courses);
 
   const db = require("./config/keys").mongoURI;
