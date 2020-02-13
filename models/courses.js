@@ -19,6 +19,14 @@ const CourseSchema = new Schema({
   },
   owner: {
     type: String
+  },
+  clusterName: {
+    type: String,
+    required: true
+  },
+  clusterUrl: {
+    type: String,
+    required: true
   }
 });
 module.exports = Course = mongoose.model("courses", CourseSchema)
