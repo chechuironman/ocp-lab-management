@@ -37,34 +37,14 @@ class Courses {
             var newCourse = new Course(req.body)
             newCourse.clusterName = cluster[0].name;
             newCourse.clusterUrl = cluster[0].url;
+            newCourse.id = newCourse.courseID;
+            console.log("COURSE");
+            console.log(newCourse);
             newCourse.save(function (err, course) {
                 if (err) return console.error(err);
                 console.log(course.courseName + " saved to course collection.");
               });
         })
-        // var cluster_ = new ClusterObject();
-        // let getCluster=async function(req){
-        //     let info= await Cluster.find({id : String(req.body.cluster)},(err,cluster)=>{})
-        //     // console.log(info); // contains user object
-        //     cluster_.name = info[0].name;
-        // }
-        // var cluster_ = new ClusterObject();
-        // Cluster.find({id : String(req.body.cluster)},(err,cluster)=>{
-            
-        //     cluster_.name = cluster[0].name;
-        //     cluster_.url = cluster[0].url; 
-        //     // console.log(cluster_);
-        // })
-        // var cluster___=getCluster(req);
-        // console.log("cluster_");
-        // console.log(cluster___);
-        // console.log("ESTOY AQUI");
-        // var newCourse = new Course(req.body)
-
-        // newCourse.save(function (err, course) {
-        //     if (err) return console.error(err);
-        //     console.log(course.courseName + " saved to course collection.");
-        //   });
         return 200;
 }   
 }

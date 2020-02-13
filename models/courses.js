@@ -10,6 +10,10 @@ const CourseSchema = new Schema({
     type: String,
     required: true
   },
+  id: {
+    type: Number,
+    required: true
+  },
   github: {
     type: String,
     required: true
