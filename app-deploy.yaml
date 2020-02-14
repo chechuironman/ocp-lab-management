@@ -61,12 +61,12 @@ spec:
     valueFrom:
       secretKeyRef:
         name: mongodb-cloud-lab
-        key: management-user
+        key: database-user
   - name: MONGODB_PASSWORD
     valueFrom:
       secretKeyRef:
         name: mongodb-cloud-lab
-        key: management-password
+        key: database-password
   - name: MONGODB_ADMIN_PASSWORD
     valueFrom:
       secretKeyRef:
