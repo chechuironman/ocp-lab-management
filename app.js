@@ -1,25 +1,20 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-let jwt = require('jsonwebtoken');
-let config = require('./config/keys');
-let middleware = require('./middleware');
 const courses = require("./routes/api/management");
 const mongoose = require("mongoose");
-
+const pino = require('pino');
+const expressPino = require('express-pino-logger');
+const logger = pino({ level: process.env.LOG_LEVEL || 'info' });
+const expressLogger = expressPino({ logger });
 function main () {
-  let app = express(); // Export app for other routes to use
-//   let handlers = new HandlerGenerator();
+  let app = express(); 
   const port = process.env.PORT || 3000;
  
   var cors=require('cors');
 
   app.options('*', cors());
-  // app.use(bodyParser.urlencoded({ // Middleware
-  //   extended: false
-  // }));
   app.use(express.json());
 
-
+  app.use(expressLogger);
   app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -29,8 +24,6 @@ function main () {
   app.use("/api/management", courses);
 
   const db = require("./config/keys").mongoURI;
-  // Connect to MongoDB
-  // console.log(db);
   mongoose
     .connect(
       db,
@@ -39,7 +32,6 @@ function main () {
     .then(() => console.log("MongoDB successfully connected for MANAGEMENT SERVICE"))
     .catch(err => console.log(err));
   
-//   app.get('/api/management/courses', middleware.checkToken, handlers.index);
   app.listen(port, () => console.log(`Server is listening on port: ${port}`));
 }
 
